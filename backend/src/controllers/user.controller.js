@@ -33,7 +33,11 @@ const registerUser = async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     )
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        // httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    })
     res.status(201).json({
 
         message: "Account created successfully",
@@ -50,23 +54,27 @@ const registerUser = async (req, res) => {
 
 }
 
-const loginUser = async(req,res)=>{
-    const {email,password} = req.body;
-    const user = await userModel.findOne({email});
-    if(!user){
-        return res.status(400).json({error:"Invalid email or password"})
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.status(400).json({ error: "Invalid email or password" })
     }
-    const isMatch = await bcrypt.compare(password,user.password);
-    if(!isMatch){
-        return res.status(400).json({error:"Invalid email or password"})
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        return res.status(400).json({ error: "Invalid email or password" })
     }
 
-    const token =  await jwt.sign(
+    const token = await jwt.sign(
         { id: user._id, username: user.username },
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     )
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        // httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    })
     res.status(200).json({
 
         message: "Login successful",
@@ -78,26 +86,26 @@ const loginUser = async(req,res)=>{
     })
 
 }
-const logoutUser = async(req,res)=>{
+const logoutUser = async (req, res) => {
     const token = req.cookies.token;
-    if(token){
-        await blackListModel.create({token});
+    if (token) {
+        await blackListModel.create({ token });
 
 
     }
-        res.clearCookie("token");
-        res.status(200).json({message:"Logout successful"})
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logout successful" })
 
 
 }
-const getUser = async(req,res)=>{
+const getUser = async (req, res) => {
     const user = await userModel.findById(req.user.id);
     res.status(200).json({
-        message:"User fetched successfully",
-        user:{
-            id:user._id,
-            username:user.username,
-            email:user.email
+        message: "User fetched successfully",
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email
         }
     })
 }
