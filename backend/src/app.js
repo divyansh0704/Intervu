@@ -7,7 +7,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(cors({
-    origin:["http://localhost:5173", "https://intervu-brown.vercel.app/"],
+    origin:["http://localhost:5173", "https://intervu-brown.vercel.app/","https://intervu-5sw3yv1iv-divyanshs-projects-e0500169.vercel.app/"],
     credentials:true
 }))
 
