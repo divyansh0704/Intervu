@@ -1,0 +1,38 @@
+.header-container{
+    // border: 1px solid red;
+    background-color: #0d1117;
+    width: 100%;
+    height: 10vh;
+    padding: 10px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left{
+        h1{
+            color:#ba6bff ;
+        }
+    }
+}
+.header-button{
+   
+    
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(197, 44, 44);
+    color: white;
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+
+    &.primary-button{
+        // background-color: #94293b;
+        // background-color: rgb(224, 71, 71) ;
+        color: white;
+    }
+    &:active{
+        transform: scale(0.9);
+    }
+
+
+}

@@ -1,0 +1,20 @@
+.button{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: #8b2dff;
+    color: white;
+    cursor: pointer;
+
+    transition: all 0.3s ease-in-out;
+
+    &.primary-button{
+        // background-color: #94293b;
+        background-color: #8b2dff;
+        color: white;
+    }
+    &:active{
+        transform: scale(0.9);
+    }
+
+}
